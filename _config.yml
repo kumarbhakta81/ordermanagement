@@ -1,0 +1,45 @@
+# GitHub Pages Configuration for Order Management System
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# Site settings
+title: "OrderManage Pro"
+description: "Complete order management system for wholesalers and retailers"
+baseurl: ""
+url: "https://kumarbhakta81.github.io/ordermanagement"
+
+# Exclude files from processing
+exclude:
+  - README.md
+  - LICENSE
+  - .gitignore
+  - node_modules/
+  - vendor/
+
+# Include files
+include:
+  - _headers
+  - _redirects
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Default layouts
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+
+# Custom variables
+landing_page: "index.html"
+admin_dashboard: "pages/admin-dashboard.html"
+wholesaler_dashboard: "pages/wholesaler-dashboard.html"
+retailer_dashboard: "pages/retailer-dashboard.html"

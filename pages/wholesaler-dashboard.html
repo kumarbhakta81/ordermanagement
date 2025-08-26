@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wholesaler Dashboard - Order Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/dashboard.css" rel="stylesheet">
+    <link href="../css/responsive.css" rel="stylesheet">
+</head>
+<body class="dashboard-page">
+    <!-- Sidebar -->
+    <div class="dashboard-sidebar sidebar-wholesaler" id="sidebar">
+        <div class="sidebar-header">
+            <h4><i class="fas fa-industry"></i> Wholesaler Hub</h4>
+            <p class="user-role">Business Manager</p>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#dashboard">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#products">
+                        <i class="fas fa-box"></i>
+                        My Products
+                        <span class="badge bg-info ms-auto">248</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#upload">
+                        <i class="fas fa-upload"></i>
+                        Upload Products
+                        <span class="badge bg-success ms-auto">New</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#inventory">
+                        <i class="fas fa-warehouse"></i>
+                        Inventory
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#orders">
+                        <i class="fas fa-shopping-cart"></i>
+                        Orders Received
+                        <span class="badge bg-warning ms-auto">12</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#analytics">
+                        <i class="fas fa-chart-bar"></i>
+                        Business Analytics
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#samples">
+                        <i class="fas fa-vial"></i>
+                        Sample Management
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#profile">
+                        <i class="fas fa-building"></i>
+                        Company Profile
+                    </a>
+                </li>
+                <li class="nav-item mt-3">
+                    <a class="nav-link logout-btn" href="#logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="dashboard-main" id="main">
+        <!-- Top Navigation -->
+        <nav class="dashboard-navbar">
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <div class="d-flex align-items-center">
+                    <button class="sidebar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h5 class="navbar-brand mb-0">
+                        <i class="fas fa-boxes"></i> OrderManage Pro
+                    </h5>
+                </div>
+                
+                <div class="d-flex align-items-center">
+                    <!-- Search -->
+                    <div class="search-box me-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search products...">
+                            <button class="btn btn-outline-secondary" type="button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Notifications -->
+                    <div class="notification-dropdown me-3">
+                        <button class="btn btn-outline-primary position-relative" data-bs-toggle="dropdown">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge">3</span>
+                        </button>
+                        <div class="dropdown-menu notification-dropdown-menu">
+                            <div class="notification-item unread">
+                                <div class="notification-content">
+                                    <div class="notification-icon success">
+                                        <i class="fas fa-shopping-cart"></i>
+                                    </div>
+                                    <div class="notification-text">
+                                        <div class="notification-title">New Order Received</div>
+                                        <div class="notification-message">Order #12348 for Wireless Headphones</div>
+                                        <div class="notification-time">10 minutes ago</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <div class="notification-content">
+                                    <div class="notification-icon info">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="notification-text">
+                                        <div class="notification-title">Product Approved</div>
+                                        <div class="notification-message">Samsung Galaxy has been approved</div>
+                                        <div class="notification-time">2 hours ago</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <div class="notification-content">
+                                    <div class="notification-icon warning">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </div>
+                                    <div class="notification-text">
+                                        <div class="notification-title">Low Stock Alert</div>
+                                        <div class="notification-message">Wireless Mouse stock is running low</div>
+                                        <div class="notification-time">1 day ago</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- User Menu -->
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
+                            <img src="../assets/images/avatars/wholesaler1.jpg" alt="Wholesaler" class="rounded-circle me-2" width="32" height="32" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iMTYiIGZpbGw9IiMwRDZFRkQiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI0ZGRkZGRiI+CjxwYXRoIGQ9Ik0xMiAxMmMxLjMgMCAyLjQtLjUgMy4xLTEuNHMxLTIuMSAxLTMuNnMtLjMtMi43LTEtMy42UzEzLjMgMiAxMiAyIDkuNiAyLjUgOC45IDMuNFM3LjkgNS41IDcuOSA3czkuMyAyLjcgMSAzLjZTMTAuNyAxMiAxMiAxMnptLTMuNSA0LjVjLTIuNyAwLTQuNSAxLjItNC41IDIuNVYyMGgxNnYtMWMwLTEuMy0xLjgtMi41LTQuNS0yLjVIOC41eiIvPgo8L3N2Zz4KPC9zdmc+'">
+                            <span class="user-name">John Wholesaler</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#profile"><i class="fas fa-building"></i> Company Profile</a></li>
+                            <li><a class="dropdown-item" href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item logout-btn" href="#logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">Wholesaler Dashboard</h1>
+                <p class="page-subtitle">Manage your business operations and track performance.</p>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="row g-4 mb-4">
+                <div class="col-xl-3 col-md-6">
+                    <div class="stats-card">
+                        <i class="fas fa-box stats-icon text-primary"></i>
+                        <div class="stats-number">248</div>
+                        <p class="stats-label">Products Listed</p>
+                        <div class="stats-change positive">
+                            <i class="fas fa-arrow-up"></i> 6 new this month
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="stats-card">
+                        <i class="fas fa-shopping-cart stats-icon text-success"></i>
+                        <div class="stats-number">1,432</div>
+                        <p class="stats-label">Orders Received</p>
+                        <div class="stats-change positive">
+                            <i class="fas fa-arrow-up"></i> 18% from last month
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="stats-card">
+                        <i class="fas fa-dollar-sign stats-icon text-warning"></i>
+                        <div class="stats-number">$184K</div>
+                        <p class="stats-label">Monthly Revenue</p>
+                        <div class="stats-change positive">
+                            <i class="fas fa-arrow-up"></i> 22% from last month
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="stats-card">
+                        <i class="fas fa-star stats-icon text-info"></i>
+                        <div class="stats-number">4.8</div>
+                        <p class="stats-label">Average Rating</p>
+                        <div class="stats-change positive">
+                            <i class="fas fa-arrow-up"></i> +0.2 from last month
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions mb-4">
+                <a href="#upload" class="quick-action">
+                    <i class="fas fa-plus-circle"></i>
+                    <h6>Add New Product</h6>
+                </a>
+                <a href="#inventory" class="quick-action">
+                    <i class="fas fa-warehouse"></i>
+                    <h6>Manage Inventory</h6>
+                </a>
+                <a href="#orders" class="quick-action">
+                    <i class="fas fa-clipboard-list"></i>
+                    <h6>View Orders</h6>
+                </a>
+                <a href="#analytics" class="quick-action">
+                    <i class="fas fa-chart-line"></i>
+                    <h6>Sales Reports</h6>
+                </a>
+                <a href="#samples" class="quick-action">
+                    <i class="fas fa-vial"></i>
+                    <h6>Sample Requests</h6>
+                </a>
+            </div>
+
+            <!-- Main Content Grid -->
+            <div class="row g-4">
+                <!-- Recent Orders -->
+                <div class="col-xl-8">
+                    <div class="dashboard-card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-shopping-cart text-success"></i> Recent Orders
+                            </h5>
+                            <a href="#orders" class="btn btn-sm btn-outline-primary">View All</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover data-table">
+                                    <thead>
+                                        <tr>
+                                            <th data-sortable data-type="text">Order ID</th>
+                                            <th data-sortable data-type="text">Customer</th>
+                                            <th data-sortable data-type="text">Product</th>
+                                            <th data-sortable data-type="number">Quantity</th>
+                                            <th data-sortable data-type="number">Amount</th>
+                                            <th data-sortable data-type="text">Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>#12348</strong></td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="../assets/images/avatars/retailer1.jpg" alt="Customer" class="rounded-circle me-2" width="32" height="32" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iMTYiIGZpbGw9IiMxOTg3NTQiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI0ZGRkZGRiI+CjxwYXRoIGQ9Ik0xMiAxMmMxLjMgMCAyLjQtLjUgMy4xLTEuNHMxLTIuMSAxLTMuNnMtLjMtMi43LTEtMy42UzEzLjMgMiAxMiAyIDkuNiAyLjUgOC45IDMuNFM3LjkgNS41IDcuOSA3czkuMyAyLjcgMSAzLjZTMTAuNyAxMiAxMiAxMnptLTMuNSA0LjVjLTIuNyAwLTQuNSAxLjItNC41IDIuNVYyMGgxNnYtMWMwLTEuMy0xLjgtMi41LTQuNS0yLjVIOC41eiIvPgo8L3N2Zz4KPC9zdmc+'">
+                                                    <div>
+                                                        <div class="fw-semibold">Jane Retailer</div>
+                                                        <small class="text-muted">Best Buy Store</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Wireless Headphones</td>
+                                            <td>25</td>
+                                            <td><strong>$4,750</strong></td>
+                                            <td><span class="status-badge status-pending">Pending</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-success me-1" title="Accept Order">
+                                                    <i class="fas fa-check"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-info" title="View Details">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>#12347</strong></td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="../assets/images/avatars/retailer2.jpg" alt="Customer" class="rounded-circle me-2" width="32" height="32" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iMTYiIGZpbGw9IiMxOTg3NTQiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI0ZGRkZGRiI+CjxwYXRoIGQ9Ik0xMiAxMmMxLjMgMCAyLjQtLjUgMy4xLTEuNHMxLTIuMSAxLTMuNnMtLjMtMi43LTEtMy42UzEzLjMgMiAxMiAyIDkuNiAyLjUgOC45IDMuNFM3LjkgNS41IDcuOSA3czkuMyAyLjcgMSAzLjZTMTAuNyAxMiAxMiAxMnptLTMuNSA0LjVjLTIuNyAwLTQuNSAxLjItNC41IDIuNVYyMGgxNnYtMWMwLTEuMy0xLjgtMi41LTQuNS0yLjVIOC41eiIvPgo8L3N2Zz4KPC9zdmc+'">
+                                                    <div>
+                                                        <div class="fw-semibold">Mike Shop Owner</div>
+                                                        <small class="text-muted">Mike's Electronics</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Samsung Galaxy Smartphone</td>
+                                            <td>10</td>
+                                            <td><strong>$8,990</strong></td>
+                                            <td><span class="status-badge status-processing">Processing</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-warning me-1" title="Mark as Shipped">
+                                                    <i class="fas fa-shipping-fast"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-info" title="View Details">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>#12346</strong></td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="../assets/images/avatars/retailer3.jpg" alt="Customer" class="rounded-circle me-2" width="32" height="32" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iMTYiIGZpbGw9IiMxOTg3NTQiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI0ZGRkZGRiI+CjxwYXRoIGQ9Ik0xMiAxMmMxLjMgMCAyLjQtLjUgMy4xLTEuNHMxLTIuMSAxLTMuNnMtLjMtMi43LTEtMy42UzEzLjMgMiAxMiAyIDkuNiAyLjUgOC45IDMuNFM3LjkgNS41IDcuOSA3czkuMyAyLjcgMSAzLjZTMTAuNyAxMiAxMiAxMnptLTMuNSA0LjVjLTIuNyAwLTQuNSAxLjItNC41IDIuNVYyMGgxNnYtMWMwLTEuMy0xLjgtMi41LTQuNS0yLjVIOC41eiIvPgo8L3N2Zz4KPC9zdmc+'">
+                                                    <div>
+                                                        <div class="fw-semibold">Tech Store LLC</div>
+                                                        <small class="text-muted">Online Retailer</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>Wireless Mouse</td>
+                                            <td>50</td>
+                                            <td><strong>$2,500</strong></td>
+                                            <td><span class="status-badge status-delivered">Delivered</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-success" title="Completed">
+                                                    <i class="fas fa-check-circle"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Products -->
+                <div class="col-xl-4">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-trophy text-warning"></i> Top Selling Products
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="top-products">
+                                <div class="product-item">
+                                    <div class="product-rank">1</div>
+                                    <img src="../assets/images/products/smartphone.jpg" alt="Product" class="product-image" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iOCIgZmlsbD0iI0Y4RjlGQSIvPgo8cGF0aCBkPSJNMTIgMTZoMTZ2OEgxMnYtOHoiIGZpbGw9IiNERUUyRTYiLz4KPHN2ZyB4PSIxNiIgeT0iMTIiIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzlDQTNBRiI+CjxwYXRoIGQ9Im0yMC4yNCAxMi4yNGEuNjI1LjYyNSAwIDAgMC0uODg0IDBMNiA5Ljg4NGEuNjI1LjYyNSAwIDEgMCAuODg0Ljg4NEwyMCAyMS4xMTZhLjYyNS42MjUgMCAwIDAgLjg4NC0uODg0TDEyIDYuODg0di42MjVhLjYyNS42MjUgMCAxIDEtMS4yNSAwdi0uNjI1QTEuODc1IDEuODc1IDAgMCAxIDEyIDQuMTI1YTEuODc1IDEuODc1IDAgMCAxIDEuODc1IDEuODc1aDYuMjVBMS44NzUgMS44NzUgMCAwIDEgMjIgOCIvPgo8L3N2Zz4KPC9zdmc+'">
+                                    <div class="product-info">
+                                        <div class="product-name">Samsung Galaxy Smartphone</div>
+                                        <div class="product-sales">1,245 units sold</div>
+                                        <div class="product-revenue">$1.1M revenue</div>
+                                    </div>
+                                </div>
+                                <div class="product-item">
+                                    <div class="product-rank">2</div>
+                                    <img src="../assets/images/products/headphones.jpg" alt="Product" class="product-image" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iOCIgZmlsbD0iI0Y4RjlGQSIvPgo8cGF0aCBkPSJNMTIgMTZoMTZ2OEgxMnYtOHoiIGZpbGw9IiNERUUyRTYiLz4KPHN2ZyB4PSIxNiIgeT0iMTIiIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzlDQTNBRiI+CjxwYXRoIGQ9Im0yMC4yNCAxMi4yNGEuNjI1LjYyNSAwIDAgMC0uODg0IDBMNiA5Ljg4NGEuNjI1LjYyNSAwIDEgMCAuODg0Ljg4NEwyMCAyMS4xMTZhLjYyNS42MjUgMCAwIDAgLjg4NC0uODg0TDEyIDYuODg0di42MjVhLjYyNS42MjUgMCAxIDEtMS4yNSAwdi0uNjI1QTEuODc1IDEuODc1IDAgMCAxIDEyIDQuMTI1YTEuODc1IDEuODc1IDAgMCAxIDEuODc1IDEuODc1aDYuMjVBMS44NzUgMS44NzUgMCAwIDEgMjIgOCIvPgo8L3N2Zz4KPC9zdmc+'">
+                                    <div class="product-info">
+                                        <div class="product-name">Wireless Headphones</div>
+                                        <div class="product-sales">892 units sold</div>
+                                        <div class="product-revenue">$169K revenue</div>
+                                    </div>
+                                </div>
+                                <div class="product-item">
+                                    <div class="product-rank">3</div>
+                                    <img src="../assets/images/products/mouse.jpg" alt="Product" class="product-image" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iOCIgZmlsbD0iI0Y4RjlGQSIvPgo8cGF0aCBkPSJNMTIgMTZoMTZ2OEgxMnYtOHoiIGZpbGw9IiNERUUyRTYiLz4KPHN2ZyB4PSIxNiIgeT0iMTIiIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzlDQTNBRiI+CjxwYXRoIGQ9Im0yMC4yNCAxMi4yNGEuNjI1LjYyNSAwIDAgMC0uODg0IDBMNiA5Ljg4NGEuNjI1LjYyNSAwIDEgMCAuODg0Ljg4NEwyMCAyMS4xMTZhLjYyNS42MjUgMCAwIDAgLjg4NC0uODg0TDEyIDYuODg0di42MjVhLjYyNS42MjUgMCAxIDEtMS4yNSAwdi0uNjI1QTEuODc1IDEuODc1IDAgMCAxIDEyIDQuMTI1YTEuODc1IDEuODc1IDAgMCAxIDEuODc1IDEuODc1aDYuMjVBMS44NzUgMS44NzUgMCAwIDEgMjIgOCIvPgo8L3N2Zz4KPC9zdmc+'">
+                                    <div class="product-info">
+                                        <div class="product-name">Wireless Mouse</div>
+                                        <div class="product-sales">2,156 units sold</div>
+                                        <div class="product-revenue">$108K revenue</div>
+                                    </div>
+                                </div>
+                                <div class="product-item">
+                                    <div class="product-rank">4</div>
+                                    <img src="../assets/images/products/keyboard.jpg" alt="Product" class="product-image" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iOCIgZmlsbD0iI0Y4RjlGQSIvPgo8cGF0aCBkPSJNMTIgMTZoMTZ2OEgxMnYtOHoiIGZpbGw9IiNERUUyRTYiLz4KPHN2ZyB4PSIxNiIgeT0iMTIiIHdpZHRoPSI4IiBoZWlnaHQ9IjgiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzlDQTNBRiI+CjxwYXRoIGQ9Im0yMC4yNCAxMi4yNGEuNjI1LjYyNSAwIDAgMC0uODg0IDBMNiA5Ljg4NGEuNjI1LjYyNSAwIDEgMCAuODg0Ljg4NEwyMCAyMS4xMTZhLjYyNS42MjUgMCAwIDAgLjg4NC0uODg0TDEyIDYuODg0di42MjVhLjYyNS42MjUgMCAxIDEtMS4yNSAwdi0uNjI1QTEuODc1IDEuODc1IDAgMCAxIDEyIDQuMTI1YTEuODc1IDEuODc1IDAgMCAxIDEuODc1IDEuODc1aDYuMjVBMS44NzUgMS44NzUgMCAwIDEgMjIgOCIvPgo8L3N2Zz4KPC9zdmc+'">
+                                    <div class="product-info">
+                                        <div class="product-name">Mechanical Keyboard</div>
+                                        <div class="product-sales">534 units sold</div>
+                                        <div class="product-revenue">$85K revenue</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="row g-4 mt-4">
+                <div class="col-xl-6">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-chart-line text-primary"></i> Sales Performance
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="salesChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-chart-pie text-success"></i> Product Categories
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="productCategoryChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/charts.js"></script>
+
+    <style>
+        .top-products {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .product-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .product-item:last-child {
+            border-bottom: none;
+        }
+
+        .product-rank {
+            width: 2rem;
+            height: 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--success-color));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .product-image {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.5rem;
+            object-fit: cover;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .product-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .product-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .product-sales,
+        .product-revenue {
+            font-size: 0.875rem;
+            color: var(--secondary-color);
+        }
+
+        .product-revenue {
+            font-weight: 600;
+            color: var(--success-color);
+        }
+
+        @media (max-width: 768px) {
+            .product-item {
+                padding: 0.75rem 0;
+            }
+            
+            .product-rank {
+                width: 1.5rem;
+                height: 1.5rem;
+                font-size: 0.8rem;
+            }
+            
+            .product-image {
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+            
+            .product-name {
+                font-size: 0.9rem;
+            }
+            
+            .product-sales,
+            .product-revenue {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</body>
+</html>

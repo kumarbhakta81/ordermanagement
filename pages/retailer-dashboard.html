@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retailer Dashboard - Order Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/dashboard.css" rel="stylesheet">
+    <link href="../css/responsive.css" rel="stylesheet">
+</head>
+<body class="dashboard-page">
+    <!-- Sidebar -->
+    <div class="dashboard-sidebar sidebar-retailer" id="sidebar">
+        <div class="sidebar-header">
+            <h4><i class="fas fa-store"></i> Retailer Hub</h4>
+            <p class="user-role">Store Manager</p>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#dashboard">
+                        <i class="fas fa-tachometer-alt"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#catalog">
+                        <i class="fas fa-th-large"></i>
+                        Product Catalog
+                        <span class="badge bg-info ms-auto">3.5K</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Shopping Cart
+                        <span class="badge bg-warning ms-auto">5</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#orders">
+                        <i class="fas fa-clipboard-list"></i>
+                        My Orders
+                        <span class="badge bg-success ms-auto">24</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#tracking">
+                        <i class="fas fa-truck"></i>
+                        Order Tracking
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#wishlist">
+                        <i class="fas fa-heart"></i>
+                        Wishlist
+                        <span class="badge bg-danger ms-auto">12</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#analytics">
+                        <i class="fas fa-chart-bar"></i>
+                        Purchase Analytics
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#profile">
+                        <i class="fas fa-store"></i>
+                        Store Profile
+                    </a>
+                </li>
+                <li class="nav-item mt-3">
+                    <a class="nav-link logout-btn" href="#logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Logout
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Main Content -->
+    <div class="dashboard-main" id="main">
+        <!-- Top Navigation -->
+        <nav class="dashboard-navbar">
+            <div class="d-flex justify-content-between align-items-center w-100">
+                <div class="d-flex align-items-center">
+                    <button class="sidebar-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h5 class="navbar-brand mb-0">
+                        <i class="fas fa-boxes"></i> OrderManage Pro
+                    </h5>
+                </div>
+                
+                <div class="d-flex align-items-center">
+                    <!-- Search -->
+                    <div class="search-box me-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search products...">
+                            <button class="btn btn-outline-secondary" type="button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Shopping Cart -->
+                    <div class="cart-dropdown me-3">
+                        <button class="btn btn-outline-success position-relative" data-bs-toggle="dropdown">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="notification-badge">5</span>
+                        </button>
+                        <div class="dropdown-menu cart-dropdown-menu" style="width: 350px;">
+                            <div class="dropdown-header">
+                                <h6 class="mb-0">Shopping Cart</h6>
+                            </div>
+                            <div class="cart-items">
+                                <div class="cart-item">
+                                    <img src="../assets/images/products/smartphone.jpg" alt="Product" class="cart-item-image" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iOCIgZmlsbD0iI0Y4RjlGQSIvPgo8L3N2Zz4='">
+                                    <div class="cart-item-info">
+                                        <div class="cart-item-name">Samsung Galaxy</div>
+                                        <div class="cart-item-price">$899 × 2</div>
+                                    </div>
+                                </div>
+                                <div class="cart-item">
+                                    <img src="../assets/images/products/headphones.jpg" alt="Product" class="cart-item-image" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiByeD0iOCIgZmlsbD0iI0Y4RjlGQSIvPgo8L3N2Zz4='">
+                                    <div class="cart-item-info">
+                                        <div class="cart-item-name">Wireless Headphones</div>
+                                        <div class="cart-item-price">$189 × 3</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="cart-total">
+                                <strong>Total: $2,365</strong>
+                            </div>
+                            <div class="cart-actions">
+                                <button class="btn btn-outline-primary btn-sm w-100 mb-2">View Cart</button>
+                                <button class="btn btn-success btn-sm w-100">Checkout</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Notifications -->
+                    <div class="notification-dropdown me-3">
+                        <button class="btn btn-outline-primary position-relative" data-bs-toggle="dropdown">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge">4</span>
+                        </button>
+                        <div class="dropdown-menu notification-dropdown-menu">
+                            <div class="notification-item unread">
+                                <div class="notification-content">
+                                    <div class="notification-icon success">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="notification-text">
+                                        <div class="notification-title">Order Shipped</div>
+                                        <div class="notification-message">Your order #12345 has been shipped</div>
+                                        <div class="notification-time">30 minutes ago</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <div class="notification-content">
+                                    <div class="notification-icon info">
+                                        <i class="fas fa-tag"></i>
+                                    </div>
+                                    <div class="notification-text">
+                                        <div class="notification-title">New Discount Available</div>
+                                        <div class="notification-message">15% off on Electronics category</div>
+                                        <div class="notification-time">2 hours ago</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="notification-item">
+                                <div class="notification-content">
+                                    <div class="notification-icon warning">
+                                        <i class="fas fa-heart"></i>
+                                    </div>
+                                    <div class="notification-text">
+                                        <div class="notification-title">Wishlist Item Back in Stock</div>
+                                        <div class="notification-message">Wireless Mouse is now available</div>
+                                        <div class="notification-time">1 day ago</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- User Menu -->
+                    <div class="dropdown">
+                        <button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown">
+                            <img src="../assets/images/avatars/retailer1.jpg" alt="Retailer" class="rounded-circle me-2" width="32" height="32" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iMTYiIGZpbGw9IiMxOTg3NTQiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iI0ZGRkZGRiI+CjxwYXRoIGQ9Ik0xMiAxMmMxLjMgMCAyLjQtLjUgMy4xLTEuNHMxLTIuMSAxLTMuNnMtLjMtMi43LTEtMy42UzEzLjMgMiAxMiAyIDkuNiAyLjUgOC45IDMuNFM3LjkgNS41IDcuOSA3czkuMyAyLjcgMSAzLjZTMTAuNyAxMiAxMiAxMnptLTMuNSA0LjVjLTIuNyAwLTQuNSAxLjItNC41IDIuNVYyMGgxNnYtMWMwLTEuMy0xLjgtMi41LTQuNS0yLjVIOC41eiIvPgo8L3N2Zz4KPC9zdmc+'">
+                            <span class="user-name">Jane Retailer</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#profile"><i class="fas fa-store"></i> Store Profile</a></li>
+                            <li><a class="dropdown-item" href="#settings"><i class="fas fa-cog"></i> Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item logout-btn" href="#logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">Retailer Dashboard</h1>
+                <p class="page-subtitle">Discover products, manage orders, and grow your business.</p>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="row g-4 mb-4">
+                <div class="col-xl-3 col-md-6">
+                    <div class="stats-card">
+                        <i class="fas fa-shopping-cart stats-icon text-primary"></i>
+                        <div class="stats-number">24</div>
+                        <p class="stats-label">Total Orders</p>
+                        <div class="stats-change positive">
+                            <i class="fas fa-arrow-up"></i> 3 new this month
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="stats-card">
+                        <i class="fas fa-dollar-sign stats-icon text-success"></i>
+                        <div class="stats-number">$45.2K</div>
+                        <p class="stats-label">Total Spent</p>
+                        <div class="stats-change positive">
+                            <i class="fas fa-arrow-up"></i> 12% from last month
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="stats-card">
+                        <i class="fas fa-truck stats-icon text-warning"></i>
+                        <div class="stats-number">18</div>
+                        <p class="stats-label">Pending Deliveries</p>
+                        <div class="stats-change neutral">
+                            <i class="fas fa-clock"></i> In transit
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="stats-card">
+                        <i class="fas fa-heart stats-icon text-info"></i>
+                        <div class="stats-number">12</div>
+                        <p class="stats-label">Wishlist Items</p>
+                        <div class="stats-change positive">
+                            <i class="fas fa-arrow-up"></i> 2 new items
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions mb-4">
+                <a href="#catalog" class="quick-action">
+                    <i class="fas fa-search"></i>
+                    <h6>Browse Products</h6>
+                </a>
+                <a href="#cart" class="quick-action">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h6>View Cart</h6>
+                </a>
+                <a href="#orders" class="quick-action">
+                    <i class="fas fa-clipboard-check"></i>
+                    <h6>Track Orders</h6>
+                </a>
+                <a href="#wishlist" class="quick-action">
+                    <i class="fas fa-heart"></i>
+                    <h6>My Wishlist</h6>
+                </a>
+                <a href="#analytics" class="quick-action">
+                    <i class="fas fa-chart-line"></i>
+                    <h6>Purchase History</h6>
+                </a>
+            </div>
+
+            <!-- Main Content Grid -->
+            <div class="row g-4">
+                <!-- Featured Products -->
+                <div class="col-xl-8">
+                    <div class="dashboard-card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-star text-warning"></i> Featured Products
+                            </h5>
+                            <a href="#catalog" class="btn btn-sm btn-outline-primary">View All</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="product-card">
+                                        <div class="product-image-container">
+                                            <img src="../assets/images/products/smartphone.jpg" alt="Product" class="product-card-image" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDIwMCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTUwIiByeD0iMTIiIGZpbGw9IiNGOEY5RkEiLz4KPHA+PHBhdGggZD0iTTcwIDYwaDYwdjMwSDcwdi0zMHoiIGZpbGw9IiNERUUyRTYiLz4KPC9zdmc+'">
+                                            <div class="product-actions">
+                                                <button class="btn btn-sm btn-outline-light" title="Add to Wishlist">
+                                                    <i class="fas fa-heart"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-light" title="Quick View">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="product-card-body">
+                                            <h6 class="product-name">Samsung Galaxy Smartphone</h6>
+                                            <p class="product-price">$899.00</p>
+                                            <div class="product-rating">
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-muted"></i>
+                                                <span class="ms-1">(4.2)</span>
+                                            </div>
+                                            <button class="btn btn-primary btn-sm w-100 mt-2">
+                                                <i class="fas fa-cart-plus"></i> Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="product-card">
+                                        <div class="product-image-container">
+                                            <img src="../assets/images/products/headphones.jpg" alt="Product" class="product-card-image" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDIwMCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTUwIiByeD0iMTIiIGZpbGw9IiNGOEY5RkEiLz4KPHA+PHBhdGggZD0iTTcwIDYwaDYwdjMwSDcwdi0zMHoiIGZpbGw9IiNERUUyRTYiLz4KPC9zdmc+'">
+                                            <div class="product-badge">New</div>
+                                            <div class="product-actions">
+                                                <button class="btn btn-sm btn-outline-light" title="Add to Wishlist">
+                                                    <i class="fas fa-heart"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-light" title="Quick View">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="product-card-body">
+                                            <h6 class="product-name">Wireless Headphones</h6>
+                                            <p class="product-price">$189.00</p>
+                                            <div class="product-rating">
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <span class="ms-1">(4.8)</span>
+                                            </div>
+                                            <button class="btn btn-primary btn-sm w-100 mt-2">
+                                                <i class="fas fa-cart-plus"></i> Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="product-card">
+                                        <div class="product-image-container">
+                                            <img src="../assets/images/products/mouse.jpg" alt="Product" class="product-card-image" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjE1MCIgdmlld0JveD0iMCAwIDIwMCAxNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMTUwIiByeD0iMTIiIGZpbGw9IiNGOEY5RkEiLz4KPHA+PHBhdGggZD0iTTcwIDYwaDYwdjMwSDcwdi0zMHoiIGZpbGw9IiNERUUyRTYiLz4KPC9zdmc+'">
+                                            <div class="product-badge sale">Sale</div>
+                                            <div class="product-actions">
+                                                <button class="btn btn-sm btn-outline-light" title="Add to Wishlist">
+                                                    <i class="fas fa-heart"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-light" title="Quick View">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="product-card-body">
+                                            <h6 class="product-name">Wireless Mouse</h6>
+                                            <p class="product-price">
+                                                <span class="text-decoration-line-through text-muted">$59.00</span>
+                                                <span class="text-success ms-1">$45.00</span>
+                                            </p>
+                                            <div class="product-rating">
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star text-warning"></i>
+                                                <i class="fas fa-star-half-alt text-warning"></i>
+                                                <span class="ms-1">(4.5)</span>
+                                            </div>
+                                            <button class="btn btn-primary btn-sm w-100 mt-2">
+                                                <i class="fas fa-cart-plus"></i> Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Status -->
+                <div class="col-xl-4">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-truck text-info"></i> Recent Orders
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="order-list">
+                                <div class="order-item">
+                                    <div class="order-info">
+                                        <div class="order-id">#12345</div>
+                                        <div class="order-date">Dec 15, 2024</div>
+                                        <div class="order-amount">$1,798.00</div>
+                                        <div class="order-status">
+                                            <span class="status-badge status-processing">In Transit</span>
+                                        </div>
+                                    </div>
+                                    <div class="order-actions">
+                                        <button class="btn btn-sm btn-outline-primary">Track</button>
+                                    </div>
+                                </div>
+                                <div class="order-item">
+                                    <div class="order-info">
+                                        <div class="order-id">#12344</div>
+                                        <div class="order-date">Dec 12, 2024</div>
+                                        <div class="order-amount">$567.00</div>
+                                        <div class="order-status">
+                                            <span class="status-badge status-delivered">Delivered</span>
+                                        </div>
+                                    </div>
+                                    <div class="order-actions">
+                                        <button class="btn btn-sm btn-outline-success">Review</button>
+                                    </div>
+                                </div>
+                                <div class="order-item">
+                                    <div class="order-info">
+                                        <div class="order-id">#12343</div>
+                                        <div class="order-date">Dec 10, 2024</div>
+                                        <div class="order-amount">$234.00</div>
+                                        <div class="order-status">
+                                            <span class="status-badge status-pending">Pending</span>
+                                        </div>
+                                    </div>
+                                    <div class="order-actions">
+                                        <button class="btn btn-sm btn-outline-warning">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="row g-4 mt-4">
+                <div class="col-xl-6">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-chart-line text-primary"></i> Purchase History
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="salesChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="dashboard-card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-chart-pie text-success"></i> Order Status Distribution
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="orderStatusChart" width="400" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/charts.js"></script>
+
+    <style>
+        /* Product Cards */
+        .product-card {
+            border: 1px solid #e9ecef;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--box-shadow-lg);
+        }
+
+        .product-image-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-card-image {
+            transform: scale(1.05);
+        }
+
+        .product-actions {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-card:hover .product-actions {
+            opacity: 1;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .product-badge.sale {
+            background: var(--danger-color);
+        }
+
+        .product-card-body {
+            padding: 1rem;
+        }
+
+        .product-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-rating {
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Cart Dropdown */
+        .cart-dropdown-menu {
+            padding: 0;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border-radius: var(--border-radius-lg);
+        }
+
+        .cart-items {
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 0.5rem;
+            object-fit: cover;
+            margin-right: 0.75rem;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .cart-item-price {
+            color: var(--secondary-color);
+            font-size: 0.8rem;
+        }
+
+        .cart-total {
+            padding: 1rem;
+            background: #f8f9fa;
+            text-align: center;
+        }
+
+        .cart-actions {
+            padding: 1rem;
+        }
+
+        /* Order Items */
+        .order-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-info {
+            flex: 1;
+        }
+
+        .order-id {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .order-date {
+            color: var(--secondary-color);
+            font-size: 0.875rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .order-amount {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .order-actions {
+            margin-left: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .product-card-image {
+                height: 150px;
+            }
+            
+            .cart-dropdown-menu {
+                width: 300px !important;
+            }
+            
+            .order-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .order-actions {
+                margin-left: 0;
+                margin-top: 0.5rem;
+                width: 100%;
+            }
+            
+            .order-actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</body>
+</html>
