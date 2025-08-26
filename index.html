@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Management System - Dashboard</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-boxes me-2"></i>OrderManagement
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">
+                            <i class="fas fa-tachometer-alt me-1"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-tags me-1"></i>Categories
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="pages/categories/category-list.html">View All</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showCategoryModal()">Add Category</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="productsDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-box me-1"></i>Products
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="pages/products/product-grid.html">View All</a></li>
+                            <li><a class="dropdown-item" href="pages/products/product-form.html">Add Product</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showProductModal()">Quick Add</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <!-- User Profile & Notifications -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="#" id="notificationsToggle">
+                            <i class="fas fa-bell"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                3<span class="visually-hidden">unread messages</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle me-1"></i>
+                            <span id="currentUserName">Admin User</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#" onclick="switchRole('wholesaler')">
+                                <i class="fas fa-warehouse me-1"></i>Wholesaler View
+                            </a></li>
+                            <li><a class="dropdown-item" href="#" onclick="switchRole('retailer')">
+                                <i class="fas fa-store me-1"></i>Retailer View
+                            </a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-1"></i>Settings</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-1"></i>Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid mt-5 pt-3">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.html">
+                                <i class="fas fa-tachometer-alt me-2"></i>Overview
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/categories/category-list.html">
+                                <i class="fas fa-tags me-2"></i>Categories
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/products/product-grid.html">
+                                <i class="fas fa-box me-2"></i>Products
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/wholesaler-dashboard.html">
+                                <i class="fas fa-warehouse me-2"></i>Wholesaler
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pages/retailer-dashboard.html">
+                                <i class="fas fa-store me-2"></i>Retailer
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Dashboard Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Dashboard Overview</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">
+                                <i class="fas fa-download me-1"></i>Export
+                            </button>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-primary">
+                            <i class="fas fa-calendar me-1"></i>This week
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="row mb-4">
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Total Categories
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalCategories">12</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-tags fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            Total Products
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalProducts">156</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-box fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-info shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                            Pending Approvals
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="pendingApprovals">8</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-clock fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-warning shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                            Low Stock Items
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="lowStockItems">5</div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-exclamation-triangle fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card shadow">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Quick Actions</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <button class="btn btn-primary w-100" onclick="showCategoryModal()">
+                                            <i class="fas fa-plus-circle me-2"></i>Add Category
+                                        </button>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <button class="btn btn-success w-100" onclick="showProductModal()">
+                                            <i class="fas fa-plus-circle me-2"></i>Add Product
+                                        </button>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <a href="pages/products/product-grid.html" class="btn btn-info w-100">
+                                            <i class="fas fa-search me-2"></i>Browse Products
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <button class="btn btn-warning w-100" onclick="showReportsModal()">
+                                            <i class="fas fa-chart-bar me-2"></i>View Reports
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card shadow">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Recent Activity</h6>
+                            </div>
+                            <div class="card-body">
+                                <div id="recentActivity">
+                                    <!-- Activity items will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light mt-5">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-md-3">
+                    <h5>Order Management</h5>
+                    <p class="text-muted">Professional order management system for businesses of all sizes.</p>
+                </div>
+                <div class="col-md-3">
+                    <h6>Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="pages/categories/category-list.html" class="text-muted">Categories</a></li>
+                        <li><a href="pages/products/product-grid.html" class="text-muted">Products</a></li>
+                        <li><a href="pages/wholesaler-dashboard.html" class="text-muted">Wholesaler</a></li>
+                        <li><a href="pages/retailer-dashboard.html" class="text-muted">Retailer</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>Support</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted">Help Center</a></li>
+                        <li><a href="#" class="text-muted">Documentation</a></li>
+                        <li><a href="#" class="text-muted">Contact Support</a></li>
+                        <li><a href="#" class="text-muted">API Reference</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>Connect</h6>
+                    <div class="d-flex">
+                        <a href="#" class="text-muted me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="#" class="text-muted"><i class="fab fa-github fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2024 Order Management System. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">Made with <i class="fas fa-heart text-danger"></i> for businesses</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/mockData.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
