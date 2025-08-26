@@ -116,9 +116,10 @@ CREATE TABLE IF NOT EXISTS notifications (
     INDEX idx_created_at (created_at)
 );
 
--- Insert default admin user (password: admin123)
+-- Insert default admin user (password: admin123 - CHANGE IN PRODUCTION!)
+-- Hash generated with bcrypt for 'admin123'
 INSERT IGNORE INTO users (username, email, password, full_name, role) 
-VALUES ('admin', 'admin@ordermanagement.com', '$2a$10$YourHashedPasswordHere', 'System Administrator', 'admin');
+VALUES ('admin', 'admin@ordermanagement.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj3Zb1QE5QGO', 'System Administrator', 'admin');
 
 -- Add some sample categories for products
 -- This can be expanded as needed
