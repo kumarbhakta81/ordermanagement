@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retailer Dashboard - Order Management System</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../index.html">
+                <i class="fas fa-boxes me-2"></i>OrderManagement
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">
+                            <i class="fas fa-tachometer-alt me-1"></i>Admin Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="retailer-dashboard.html">
+                            <i class="fas fa-store me-1"></i>Retailer
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="showSection('catalog')">
+                            <i class="fas fa-shopping-bag me-1"></i>Product Catalog
+                        </a>
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="#" onclick="showSection('cart')">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                                3<span class="visually-hidden">items in cart</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="#" id="notificationsToggle">
+                            <i class="fas fa-bell"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                2<span class="visually-hidden">unread messages</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user-circle me-1"></i>
+                            <span id="currentUserName">TechStore Plus</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#" onclick="switchRole('admin')">
+                                <i class="fas fa-user-shield me-1"></i>Admin View
+                            </a></li>
+                            <li><a class="dropdown-item" href="#" onclick="switchRole('wholesaler')">
+                                <i class="fas fa-warehouse me-1"></i>Wholesaler View
+                            </a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-1"></i>Settings</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-1"></i>Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid mt-5 pt-3">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="retailer-dashboard.html">
+                                <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="showSection('catalog')">
+                                <i class="fas fa-shopping-bag me-2"></i>Browse Products
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="showSection('cart')">
+                                <i class="fas fa-shopping-cart me-2"></i>Shopping Cart
+                                <span class="badge bg-success ms-2" id="cartItemCount">3</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="showSection('orders')">
+                                <i class="fas fa-list-alt me-2"></i>My Orders
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="showSection('wishlist')">
+                                <i class="fas fa-heart me-2"></i>Wishlist
+                                <span class="badge bg-danger ms-2" id="wishlistItemCount">5</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="showSection('profile')">
+                                <i class="fas fa-user me-2"></i>My Profile
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Dashboard Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <!-- Dashboard Overview Section -->
+                <div id="overview-section" class="dashboard-section">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">
+                            <i class="fas fa-store me-2 text-primary"></i>Retailer Dashboard
+                        </h1>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <div class="btn-group me-2">
+                                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="showSection('catalog')">
+                                    <i class="fas fa-shopping-bag me-1"></i>Browse Products
+                                </button>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-primary" onclick="showSection('cart')">
+                                <i class="fas fa-shopping-cart me-1"></i>View Cart
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Stats Cards -->
+                    <div class="row mb-4">
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Total Orders
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalOrders">1,245</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Total Spent
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="totalSpent">$89,450</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                Pending Orders
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="pendingOrders">5</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-clock fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                Wishlist Items
+                                            </div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="wishlistItems">5</div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-heart fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions & Recent Orders -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="card shadow">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Quick Actions</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <button class="btn btn-primary w-100" onclick="showSection('catalog')">
+                                                <i class="fas fa-shopping-bag me-2"></i>Browse Products
+                                            </button>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <button class="btn btn-success w-100" onclick="showSection('cart')">
+                                                <i class="fas fa-shopping-cart me-2"></i>View Cart
+                                            </button>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <button class="btn btn-info w-100" onclick="showSection('orders')">
+                                                <i class="fas fa-list-alt me-2"></i>Track Orders
+                                            </button>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <button class="btn btn-warning w-100" onclick="showSection('wishlist')">
+                                                <i class="fas fa-heart me-2"></i>My Wishlist
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card shadow">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Recent Orders</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div id="recentOrdersList">
+                                        <!-- Recent orders will be loaded here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recommendations -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card shadow">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Recommended Products</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div id="recommendedProducts" class="row">
+                                        <!-- Recommended products will be loaded here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Catalog Section -->
+                <div id="catalog-section" class="dashboard-section" style="display: none;">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">
+                            <i class="fas fa-shopping-bag me-2 text-primary"></i>Product Catalog
+                        </h1>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <div class="btn-group me-2">
+                                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="toggleCatalogView('grid')" id="gridViewBtn">
+                                    <i class="fas fa-th me-1"></i>Grid
+                                </button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="toggleCatalogView('list')" id="listViewBtn">
+                                    <i class="fas fa-list me-1"></i>List
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Catalog Filters -->
+                    <div class="search-filter-bar">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-search"></i></span>
+                                    <input type="text" class="form-control" id="searchCatalog" placeholder="Search products...">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-select" id="filterCatalogCategory">
+                                    <option value="">All Categories</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-select" id="filterCatalogPrice">
+                                    <option value="">All Prices</option>
+                                    <option value="0-50">$0 - $50</option>
+                                    <option value="50-100">$50 - $100</option>
+                                    <option value="100-500">$100 - $500</option>
+                                    <option value="500-1000">$500 - $1000</option>
+                                    <option value="1000+">$1000+</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-select" id="sortCatalog">
+                                    <option value="name">Sort by Name</option>
+                                    <option value="price-low">Price: Low to High</option>
+                                    <option value="price-high">Price: High to Low</option>
+                                    <option value="newest">Newest First</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-outline-secondary" onclick="clearCatalogFilters()">
+                                    <i class="fas fa-times me-1"></i>Clear Filters
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Grid -->
+                    <div id="catalogProductsContainer">
+                        <!-- Products will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Shopping Cart Section -->
+                <div id="cart-section" class="dashboard-section" style="display: none;">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">
+                            <i class="fas fa-shopping-cart me-2 text-primary"></i>Shopping Cart
+                        </h1>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <button type="button" class="btn btn-sm btn-outline-secondary me-2" onclick="clearCart()">
+                                <i class="fas fa-trash me-1"></i>Clear Cart
+                            </button>
+                            <button type="button" class="btn btn-sm btn-primary" onclick="proceedToCheckout()">
+                                <i class="fas fa-credit-card me-1"></i>Checkout
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card shadow">
+                                <div class="card-header">
+                                    <h6 class="m-0 font-weight-bold text-primary">Cart Items</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div id="cartItemsContainer">
+                                        <!-- Cart items will be loaded here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="card shadow">
+                                <div class="card-header">
+                                    <h6 class="m-0 font-weight-bold text-primary">Order Summary</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Subtotal:</span>
+                                        <span id="cartSubtotal">$0.00</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Tax:</span>
+                                        <span id="cartTax">$0.00</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Shipping:</span>
+                                        <span id="cartShipping">$0.00</span>
+                                    </div>
+                                    <hr>
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <strong>Total:</strong>
+                                        <strong id="cartTotal">$0.00</strong>
+                                    </div>
+                                    <button class="btn btn-primary w-100" onclick="proceedToCheckout()">
+                                        <i class="fas fa-credit-card me-1"></i>Proceed to Checkout
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orders Section -->
+                <div id="orders-section" class="dashboard-section" style="display: none;">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">
+                            <i class="fas fa-list-alt me-2 text-primary"></i>My Orders
+                        </h1>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <div class="btn-group me-2">
+                                <button type="button" class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-filter me-1"></i>Filter
+                                </button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-download me-1"></i>Export
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order List -->
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <div id="ordersContainer">
+                                <!-- Orders will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wishlist Section -->
+                <div id="wishlist-section" class="dashboard-section" style="display: none;">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">
+                            <i class="fas fa-heart me-2 text-primary"></i>My Wishlist
+                        </h1>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <button type="button" class="btn btn-sm btn-outline-secondary" onclick="clearWishlist()">
+                                <i class="fas fa-trash me-1"></i>Clear Wishlist
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="wishlistContainer">
+                        <!-- Wishlist items will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Profile Section -->
+                <div id="profile-section" class="dashboard-section" style="display: none;">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">
+                            <i class="fas fa-user me-2 text-primary"></i>My Profile
+                        </h1>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <button type="button" class="btn btn-sm btn-primary" onclick="saveProfile()">
+                                <i class="fas fa-save me-1"></i>Save Changes
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card shadow">
+                                <div class="card-header">
+                                    <h6 class="m-0 font-weight-bold text-primary">Profile Information</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form id="profileForm">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="profileName" class="form-label">Business Name</label>
+                                                    <input type="text" class="form-control" id="profileName" value="TechStore Plus">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="profileEmail" class="form-label">Email</label>
+                                                    <input type="email" class="form-control" id="profileEmail" value="admin@techstoreplus.com">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="profilePhone" class="form-label">Phone</label>
+                                                    <input type="tel" class="form-control" id="profilePhone" value="+1-555-0127">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="profileWebsite" class="form-label">Website</label>
+                                                    <input type="url" class="form-control" id="profileWebsite" value="www.techstoreplus.com">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="profileAddress" class="form-label">Address</label>
+                                            <textarea class="form-control" id="profileAddress" rows="3">654 Retail Street, Denver, CO 80202</textarea>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="card shadow">
+                                <div class="card-header">
+                                    <h6 class="m-0 font-weight-bold text-primary">Account Statistics</h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="text-center mb-3">
+                                        <h3 class="text-primary">4.7</h3>
+                                        <p class="mb-0">Customer Rating</p>
+                                        <div class="text-warning">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Member Since:</span>
+                                        <span>Sep 2023</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Total Orders:</span>
+                                        <span>1,245</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Total Spent:</span>
+                                        <span>$89,450</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light mt-5">
+        <div class="container py-4">
+            <div class="row">
+                <div class="col-md-3">
+                    <h5>Order Management</h5>
+                    <p class="text-muted">Professional order management system for businesses of all sizes.</p>
+                </div>
+                <div class="col-md-3">
+                    <h6>Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="categories/category-list.html" class="text-muted">Categories</a></li>
+                        <li><a href="products/product-grid.html" class="text-muted">Products</a></li>
+                        <li><a href="wholesaler-dashboard.html" class="text-muted">Wholesaler</a></li>
+                        <li><a href="retailer-dashboard.html" class="text-muted">Retailer</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>Support</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-muted">Help Center</a></li>
+                        <li><a href="#" class="text-muted">Documentation</a></li>
+                        <li><a href="#" class="text-muted">Contact Support</a></li>
+                        <li><a href="#" class="text-muted">API Reference</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>Connect</h6>
+                    <div class="d-flex">
+                        <a href="#" class="text-muted me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#" class="text-muted me-3"><i class="fab fa-linkedin fa-lg"></i></a>
+                        <a href="#" class="text-muted"><i class="fab fa-github fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2024 Order Management System. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">Made with <i class="fas fa-heart text-danger"></i> for businesses</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Mock Data -->
+    <script src="../js/mockData.js"></script>
+    <!-- Main App -->
+    <script src="../js/app.js"></script>
+    <!-- Retailer Dashboard Script -->
+    <script>
+        // Shopping cart and wishlist data
+        let shoppingCart = [
+            { productId: 1, quantity: 2, price: 899.99 },
+            { productId: 3, quantity: 1, price: 2299.99 },
+            { productId: 5, quantity: 5, price: 24.99 }
+        ];
+
+        let wishlist = [1, 2, 3, 4, 5];
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadDashboardData();
+            loadRecentOrders();
+            loadRecommendedProducts();
+            updateCartDisplay();
+            updateWishlistDisplay();
+        });
+
+        // Show different sections
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.dashboard-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Remove active class from all nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Show selected section
+            const section = document.getElementById(sectionName + '-section');
+            if (section) {
+                section.style.display = 'block';
+                
+                // Add active class to corresponding nav link
+                const navLink = document.querySelector(`[onclick="showSection('${sectionName}')"]`);
+                if (navLink) {
+                    navLink.classList.add('active');
+                }
+                
+                // Load section-specific data
+                loadSectionData(sectionName);
+            }
+        }
+
+        // Load dashboard data
+        function loadDashboardData() {
+            // Update cart and wishlist counts
+            document.getElementById('cartItemCount').textContent = shoppingCart.length;
+            document.getElementById('wishlistItemCount').textContent = wishlist.length;
+        }
+
+        // Load section-specific data
+        function loadSectionData(sectionName) {
+            switch(sectionName) {
+                case 'catalog':
+                    loadProductCatalog();
+                    break;
+                case 'cart':
+                    loadCartItems();
+                    break;
+                case 'orders':
+                    loadMyOrders();
+                    break;
+                case 'wishlist':
+                    loadWishlistItems();
+                    break;
+            }
+        }
+
+        // Load product catalog
+        function loadProductCatalog() {
+            const container = document.getElementById('catalogProductsContainer');
+            const approvedProducts = window.mockData.products.filter(p => p.status === 'approved');
+            
+            const catalogHtml = `
+                <div class="row">
+                    ${approvedProducts.map(product => `
+                        <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                            <div class="card product-card h-100">
+                                <div class="position-relative">
+                                    <img src="${product.images[0]}" class="card-img-top product-image" alt="${product.name}">
+                                    ${product.salePrice ? 
+                                        '<div class="position-absolute top-0 start-0 m-2"><span class="badge bg-danger">Sale</span></div>' : ''
+                                    }
+                                    <div class="position-absolute top-0 end-0 m-2">
+                                        <button class="btn btn-sm btn-outline-light" onclick="toggleWishlist(${product.id})">
+                                            <i class="fas fa-heart ${wishlist.includes(product.id) ? 'text-danger' : ''}"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">${product.name}</h5>
+                                    <p class="card-text text-muted small">${product.description.substring(0, 100)}...</p>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="price">
+                                            ${product.salePrice ? 
+                                                `<span class="text-danger fw-bold">$${product.salePrice}</span>
+                                                 <span class="text-muted text-decoration-line-through small">$${product.price}</span>` :
+                                                `<span class="fw-bold">$${product.price}</span>`
+                                            }
+                                        </div>
+                                        <small class="text-muted">Stock: ${product.stock}</small>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <small class="text-muted">
+                                            <i class="fas fa-tag me-1"></i>${product.categoryName}
+                                        </small>
+                                        <div class="btn-group btn-group-sm">
+                                            <button class="btn btn-outline-primary" onclick="viewProductDetails(${product.id})">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-primary" onclick="addToCart(${product.id})">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            
+            container.innerHTML = catalogHtml;
+        }
+
+        // Load cart items
+        function loadCartItems() {
+            const container = document.getElementById('cartItemsContainer');
+            
+            if (shoppingCart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-5">
+                        <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
+                        <h4 class="text-muted">Your cart is empty</h4>
+                        <p class="text-muted">Browse our products and add items to your cart.</p>
+                        <button class="btn btn-primary" onclick="showSection('catalog')">
+                            <i class="fas fa-shopping-bag me-1"></i>Browse Products
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            const cartHtml = shoppingCart.map(item => {
+                const product = window.mockData.products.find(p => p.id === item.productId);
+                const totalPrice = item.quantity * item.price;
+                
+                return `
+                    <div class="row mb-3 border-bottom pb-3">
+                        <div class="col-md-2">
+                            <img src="${product.images[0]}" alt="${product.name}" class="img-fluid rounded">
+                        </div>
+                        <div class="col-md-4">
+                            <h6>${product.name}</h6>
+                            <p class="text-muted small">${product.description.substring(0, 80)}...</p>
+                            <small class="text-muted">SKU: ${product.sku}</small>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="input-group input-group-sm">
+                                <button class="btn btn-outline-secondary" onclick="updateCartQuantity(${item.productId}, ${item.quantity - 1})">-</button>
+                                <input type="number" class="form-control text-center" value="${item.quantity}" min="1" onchange="updateCartQuantity(${item.productId}, this.value)">
+                                <button class="btn btn-outline-secondary" onclick="updateCartQuantity(${item.productId}, ${item.quantity + 1})">+</button>
+                            </div>
+                        </div>
+                        <div class="col-md-2 text-center">
+                            <div class="fw-bold">$${item.price.toFixed(2)}</div>
+                            <small class="text-muted">each</small>
+                        </div>
+                        <div class="col-md-2 text-end">
+                            <div class="fw-bold">$${totalPrice.toFixed(2)}</div>
+                            <button class="btn btn-sm btn-outline-danger mt-1" onclick="removeFromCart(${item.productId})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            container.innerHTML = cartHtml;
+            updateCartSummary();
+        }
+
+        // Load my orders
+        function loadMyOrders() {
+            const container = document.getElementById('ordersContainer');
+            const myOrders = window.mockData.orders.filter(o => o.retailerId === 7);
+            
+            const ordersHtml = myOrders.map(order => `
+                <div class="card mb-3">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-0">${order.orderNumber}</h6>
+                            <small class="text-muted">Placed on ${new Date(order.orderDate).toLocaleDateString()}</small>
+                        </div>
+                        <div class="text-end">
+                            <div class="fw-bold">$${order.totalAmount.toFixed(2)}</div>
+                            <span class="badge status-${order.status}">${order.status}</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h6>Order Items:</h6>
+                                ${order.items.map(item => `
+                                    <div class="d-flex align-items-center mb-2">
+                                        <div class="flex-grow-1">
+                                            <span>${item.productName}</span>
+                                            <small class="text-muted"> x ${item.quantity}</small>
+                                        </div>
+                                        <div>$${item.totalPrice.toFixed(2)}</div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <button class="btn btn-sm btn-outline-primary me-1" onclick="trackOrder('${order.orderNumber}')">
+                                    <i class="fas fa-truck me-1"></i>Track
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary" onclick="viewOrderDetails(${order.id})">
+                                    <i class="fas fa-eye me-1"></i>Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            container.innerHTML = ordersHtml;
+        }
+
+        // Load wishlist items
+        function loadWishlistItems() {
+            const container = document.getElementById('wishlistContainer');
+            const wishlistProducts = window.mockData.products.filter(p => wishlist.includes(p.id));
+            
+            if (wishlistProducts.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-5">
+                        <i class="fas fa-heart fa-3x text-muted mb-3"></i>
+                        <h4 class="text-muted">Your wishlist is empty</h4>
+                        <p class="text-muted">Add products to your wishlist to save them for later.</p>
+                        <button class="btn btn-primary" onclick="showSection('catalog')">
+                            <i class="fas fa-shopping-bag me-1"></i>Browse Products
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            const wishlistHtml = `
+                <div class="row">
+                    ${wishlistProducts.map(product => `
+                        <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                            <div class="card product-card h-100">
+                                <div class="position-relative">
+                                    <img src="${product.images[0]}" class="card-img-top product-image" alt="${product.name}">
+                                    <div class="position-absolute top-0 end-0 m-2">
+                                        <button class="btn btn-sm btn-danger" onclick="removeFromWishlist(${product.id})">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">${product.name}</h5>
+                                    <p class="card-text text-muted small">${product.description.substring(0, 100)}...</p>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <div class="price">
+                                            ${product.salePrice ? 
+                                                `<span class="text-danger fw-bold">$${product.salePrice}</span>
+                                                 <span class="text-muted text-decoration-line-through small">$${product.price}</span>` :
+                                                `<span class="fw-bold">$${product.price}</span>`
+                                            }
+                                        </div>
+                                        <small class="text-muted">Stock: ${product.stock}</small>
+                                    </div>
+                                    <button class="btn btn-primary w-100" onclick="addToCart(${product.id})">
+                                        <i class="fas fa-shopping-cart me-1"></i>Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            
+            container.innerHTML = wishlistHtml;
+        }
+
+        // Load recent orders
+        function loadRecentOrders() {
+            const container = document.getElementById('recentOrdersList');
+            const recentOrders = window.mockData.orders.filter(o => o.retailerId === 7).slice(0, 3);
+            
+            const ordersHtml = recentOrders.map(order => `
+                <div class="d-flex align-items-center mb-3">
+                    <div class="flex-grow-1">
+                        <h6 class="mb-1">${order.orderNumber}</h6>
+                        <p class="mb-0 text-muted small">${new Date(order.orderDate).toLocaleDateString()}</p>
+                    </div>
+                    <div class="text-end">
+                        <div class="fw-bold">$${order.totalAmount.toFixed(2)}</div>
+                        <span class="badge status-${order.status} small">${order.status}</span>
+                    </div>
+                </div>
+            `).join('');
+            
+            container.innerHTML = ordersHtml;
+        }
+
+        // Load recommended products
+        function loadRecommendedProducts() {
+            const container = document.getElementById('recommendedProducts');
+            const recommendedProducts = window.mockData.products.filter(p => p.status === 'approved').slice(0, 4);
+            
+            const productsHtml = recommendedProducts.map(product => `
+                <div class="col-md-3 mb-3">
+                    <div class="card product-card h-100">
+                        <img src="${product.images[0]}" class="card-img-top" style="height: 150px; object-fit: cover;" alt="${product.name}">
+                        <div class="card-body p-3">
+                            <h6 class="card-title">${product.name}</h6>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-bold">$${(product.salePrice || product.price).toFixed(2)}</span>
+                                <button class="btn btn-sm btn-primary" onclick="addToCart(${product.id})">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            container.innerHTML = productsHtml;
+        }
+
+        // Cart functions
+        function addToCart(productId) {
+            const product = window.mockData.products.find(p => p.id === productId);
+            const existingItem = shoppingCart.find(item => item.productId === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                shoppingCart.push({
+                    productId: productId,
+                    quantity: 1,
+                    price: product.salePrice || product.price
+                });
+            }
+            
+            updateCartDisplay();
+            showNotification(`${product.name} added to cart!`, 'success');
+        }
+
+        function removeFromCart(productId) {
+            shoppingCart = shoppingCart.filter(item => item.productId !== productId);
+            updateCartDisplay();
+            loadCartItems();
+            showNotification('Item removed from cart', 'info');
+        }
+
+        function updateCartQuantity(productId, newQuantity) {
+            const quantity = parseInt(newQuantity);
+            if (quantity <= 0) {
+                removeFromCart(productId);
+                return;
+            }
+            
+            const item = shoppingCart.find(item => item.productId === productId);
+            if (item) {
+                item.quantity = quantity;
+                loadCartItems();
+                updateCartDisplay();
+            }
+        }
+
+        function updateCartDisplay() {
+            document.getElementById('cartItemCount').textContent = shoppingCart.length;
+            const cartBadge = document.querySelector('.navbar .badge');
+            if (cartBadge) {
+                cartBadge.textContent = shoppingCart.length;
+            }
+        }
+
+        function updateCartSummary() {
+            const subtotal = shoppingCart.reduce((total, item) => total + (item.quantity * item.price), 0);
+            const tax = subtotal * 0.08; // 8% tax
+            const shipping = subtotal > 100 ? 0 : 9.99;
+            const total = subtotal + tax + shipping;
+            
+            document.getElementById('cartSubtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('cartTax').textContent = `$${tax.toFixed(2)}`;
+            document.getElementById('cartShipping').textContent = shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`;
+            document.getElementById('cartTotal').textContent = `$${total.toFixed(2)}`;
+        }
+
+        function clearCart() {
+            if (confirm('Are you sure you want to clear your cart?')) {
+                shoppingCart = [];
+                updateCartDisplay();
+                loadCartItems();
+                showNotification('Cart cleared', 'info');
+            }
+        }
+
+        function proceedToCheckout() {
+            if (shoppingCart.length === 0) {
+                showNotification('Your cart is empty', 'warning');
+                return;
+            }
+            showNotification('Checkout feature coming soon!', 'info');
+        }
+
+        // Wishlist functions
+        function toggleWishlist(productId) {
+            const product = window.mockData.products.find(p => p.id === productId);
+            
+            if (wishlist.includes(productId)) {
+                wishlist = wishlist.filter(id => id !== productId);
+                showNotification(`${product.name} removed from wishlist`, 'info');
+            } else {
+                wishlist.push(productId);
+                showNotification(`${product.name} added to wishlist!`, 'success');
+            }
+            
+            updateWishlistDisplay();
+            // Refresh current section if it's catalog or wishlist
+            const currentSection = document.querySelector('.dashboard-section[style="display: block;"]');
+            if (currentSection && (currentSection.id === 'catalog-section' || currentSection.id === 'wishlist-section')) {
+                loadSectionData(currentSection.id.replace('-section', ''));
+            }
+        }
+
+        function removeFromWishlist(productId) {
+            wishlist = wishlist.filter(id => id !== productId);
+            updateWishlistDisplay();
+            loadWishlistItems();
+            showNotification('Item removed from wishlist', 'info');
+        }
+
+        function updateWishlistDisplay() {
+            document.getElementById('wishlistItemCount').textContent = wishlist.length;
+            const wishlistBadge = document.querySelector('#wishlistItems');
+            if (wishlistBadge) {
+                wishlistBadge.textContent = wishlist.length;
+            }
+        }
+
+        function clearWishlist() {
+            if (confirm('Are you sure you want to clear your wishlist?')) {
+                wishlist = [];
+                updateWishlistDisplay();
+                loadWishlistItems();
+                showNotification('Wishlist cleared', 'info');
+            }
+        }
+
+        // Other functions
+        function viewProductDetails(productId) {
+            showNotification('Product details feature coming soon!', 'info');
+        }
+
+        function trackOrder(orderNumber) {
+            showNotification(`Tracking order ${orderNumber}...`, 'info');
+        }
+
+        function viewOrderDetails(orderId) {
+            showNotification('Order details feature coming soon!', 'info');
+        }
+
+        function saveProfile() {
+            showNotification('Profile saved successfully!', 'success');
+        }
+
+        function toggleCatalogView(view) {
+            // Update button states
+            document.getElementById('gridViewBtn').classList.toggle('active', view === 'grid');
+            document.getElementById('listViewBtn').classList.toggle('active', view === 'list');
+            // Reload catalog with new view
+            loadProductCatalog();
+        }
+
+        function clearCatalogFilters() {
+            document.getElementById('searchCatalog').value = '';
+            document.getElementById('filterCatalogCategory').value = '';
+            document.getElementById('filterCatalogPrice').value = '';
+            document.getElementById('sortCatalog').value = 'name';
+            loadProductCatalog();
+        }
+
+        // Make functions available globally
+        window.showSection = showSection;
+        window.addToCart = addToCart;
+        window.removeFromCart = removeFromCart;
+        window.updateCartQuantity = updateCartQuantity;
+        window.clearCart = clearCart;
+        window.proceedToCheckout = proceedToCheckout;
+        window.toggleWishlist = toggleWishlist;
+        window.removeFromWishlist = removeFromWishlist;
+        window.clearWishlist = clearWishlist;
+        window.viewProductDetails = viewProductDetails;
+        window.trackOrder = trackOrder;
+        window.viewOrderDetails = viewOrderDetails;
+        window.saveProfile = saveProfile;
+        window.toggleCatalogView = toggleCatalogView;
+        window.clearCatalogFilters = clearCatalogFilters;
+    </script>
+</body>
+</html>
