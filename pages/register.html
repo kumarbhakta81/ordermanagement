@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Order Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/auth.css" rel="stylesheet">
+    <link href="../css/responsive.css" rel="stylesheet">
+</head>
+<body class="auth-page">
+    <!-- Back to Home Link -->
+    <a href="../index.html" class="back-to-home">
+        <i class="fas fa-arrow-left"></i> Back to Home
+    </a>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="auth-container">
+            <div class="auth-card">
+                <!-- Header -->
+                <div class="auth-header">
+                    <h2><i class="fas fa-user-plus"></i> Create Account</h2>
+                    <p>Join OrderManage Pro and start managing your business</p>
+                </div>
+
+                <!-- Body -->
+                <div class="auth-body">
+                    <!-- Registration Form -->
+                    <form id="registerForm" novalidate>
+                        <!-- Name Field -->
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" required>
+                            <label for="name">Full Name</label>
+                            <div class="invalid-feedback">
+                                Please enter your full name (at least 2 characters).
+                            </div>
+                        </div>
+
+                        <!-- Email Field -->
+                        <div class="form-floating">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
+                            <label for="email">Email address</label>
+                            <div class="invalid-feedback">
+                                Please enter a valid email address.
+                            </div>
+                        </div>
+
+                        <!-- Password Field -->
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                            <label for="password">Password</label>
+                            <div class="invalid-feedback">
+                                Password must be at least 6 characters long.
+                            </div>
+                        </div>
+
+                        <!-- Password Strength Indicator -->
+                        <div class="password-strength" style="display: none;">
+                            <div class="strength-meter">
+                                <div class="strength-meter-fill"></div>
+                            </div>
+                            <div class="strength-text">Password strength: weak</div>
+                        </div>
+
+                        <!-- Confirm Password Field -->
+                        <div class="form-floating">
+                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+                            <label for="confirmPassword">Confirm Password</label>
+                            <div class="invalid-feedback">
+                                Passwords do not match.
+                            </div>
+                        </div>
+
+                        <!-- Role Selection -->
+                        <div class="role-selection">
+                            <h6 class="mb-3">Choose your role:</h6>
+                            
+                            <div class="role-option admin" onclick="selectRole('admin')">
+                                <div class="role-info">
+                                    <input type="radio" name="role" value="admin" id="role-admin" required>
+                                    <i class="fas fa-crown role-icon"></i>
+                                    <div class="role-details">
+                                        <h6>System Administrator</h6>
+                                        <p>Manage users, approve products, and oversee system operations</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="role-option wholesaler" onclick="selectRole('wholesaler')">
+                                <div class="role-info">
+                                    <input type="radio" name="role" value="wholesaler" id="role-wholesaler" required>
+                                    <i class="fas fa-industry role-icon"></i>
+                                    <div class="role-details">
+                                        <h6>Wholesaler</h6>
+                                        <p>Upload products, manage inventory, and process orders</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="role-option retailer" onclick="selectRole('retailer')">
+                                <div class="role-info">
+                                    <input type="radio" name="role" value="retailer" id="role-retailer" required>
+                                    <i class="fas fa-store role-icon"></i>
+                                    <div class="role-details">
+                                        <h6>Retailer</h6>
+                                        <p>Browse products, place orders, and manage your store</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Company Field (shown for wholesaler/retailer) -->
+                        <div id="companyField" class="form-floating" style="display: none;">
+                            <input type="text" class="form-control" id="company" name="company" placeholder="Company Name">
+                            <label for="company">Company Name</label>
+                            <div class="invalid-feedback">
+                                Please enter your company name.
+                            </div>
+                        </div>
+
+                        <!-- Terms and Conditions -->
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="terms" name="terms" required>
+                            <label class="form-check-label" for="terms">
+                                I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms and Conditions</a> and <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacy Policy</a>
+                            </label>
+                            <div class="invalid-feedback">
+                                You must agree to the terms and conditions.
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn auth-submit">
+                            <i class="fas fa-user-plus"></i> Create Account
+                        </button>
+                    </form>
+
+                    <!-- Footer Links -->
+                    <div class="auth-links">
+                        <p class="mb-0">Already have an account? <a href="login.html">Sign in here</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms and Conditions Modal -->
+    <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="termsModalLabel">
+                        <i class="fas fa-file-contract"></i> Terms and Conditions
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h6>1. Acceptance of Terms</h6>
+                    <p>By accessing and using the OrderManage Pro platform, you accept and agree to be bound by the terms and provision of this agreement.</p>
+                    
+                    <h6>2. Use License</h6>
+                    <p>Permission is granted to temporarily use OrderManage Pro for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title.</p>
+                    
+                    <h6>3. User Accounts</h6>
+                    <p>When you create an account with us, you must provide information that is accurate, complete, and current at all times. You are responsible for safeguarding the password and for all activities that occur under your account.</p>
+                    
+                    <h6>4. Prohibited Uses</h6>
+                    <p>You may not use our platform for any unlawful purpose or to solicit others to perform unlawful acts. You may not violate any international, federal, provincial, or state regulations, rules, or laws.</p>
+                    
+                    <h6>5. Privacy Policy</h6>
+                    <p>Your privacy is important to us. Please review our Privacy Policy, which also governs your use of the platform, to understand our practices.</p>
+                    
+                    <h6>6. Modifications</h6>
+                    <p>OrderManage Pro may revise these terms of service at any time without notice. By using this platform, you are agreeing to be bound by the then current version of these terms of service.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="privacyModalLabel">
+                        <i class="fas fa-shield-alt"></i> Privacy Policy
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h6>Information We Collect</h6>
+                    <p>We collect information you provide directly to us, such as when you create an account, make a purchase, or contact us for support.</p>
+                    
+                    <h6>How We Use Your Information</h6>
+                    <p>We use the information we collect to provide, maintain, and improve our services, process transactions, and communicate with you.</p>
+                    
+                    <h6>Information Sharing</h6>
+                    <p>We do not sell, trade, or otherwise transfer your personal information to third parties except as described in this policy.</p>
+                    
+                    <h6>Data Security</h6>
+                    <p>We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.</p>
+                    
+                    <h6>Your Rights</h6>
+                    <p>You have the right to access, update, or delete your personal information. You may also opt out of receiving promotional communications from us.</p>
+                    
+                    <h6>Contact Us</h6>
+                    <p>If you have any questions about this Privacy Policy, please contact us at privacy@ordermanage.com</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    
+    <script>
+        // Role selection function
+        function selectRole(role) {
+            // Clear all selections
+            document.querySelectorAll('.role-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Select the clicked role
+            document.querySelector(`.role-option.${role}`).classList.add('selected');
+            document.getElementById(`role-${role}`).checked = true;
+            
+            // Update role selection in auth manager
+            if (window.authManager) {
+                window.authManager.updateRoleSelection(role);
+            }
+        }
+
+        // Form validation
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const form = this;
+            let isValid = true;
+            
+            // Clear previous validation
+            form.querySelectorAll('.form-control, .form-check-input').forEach(input => {
+                input.classList.remove('is-valid', 'is-invalid');
+            });
+            
+            // Name validation
+            const name = form.name.value.trim();
+            if (!name || name.length < 2) {
+                form.name.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                form.name.classList.add('is-valid');
+            }
+            
+            // Email validation
+            const email = form.email.value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email || !emailRegex.test(email)) {
+                form.email.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                form.email.classList.add('is-valid');
+            }
+            
+            // Password validation
+            const password = form.password.value;
+            if (!password || password.length < 6) {
+                form.password.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                form.password.classList.add('is-valid');
+            }
+            
+            // Confirm password validation
+            const confirmPassword = form.confirmPassword.value;
+            if (!confirmPassword || password !== confirmPassword) {
+                form.confirmPassword.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                form.confirmPassword.classList.add('is-valid');
+            }
+            
+            // Role validation
+            const role = form.querySelector('input[name="role"]:checked');
+            if (!role) {
+                isValid = false;
+                if (window.app) {
+                    window.app.showToast('Please select a role', 'error');
+                }
+            }
+            
+            // Company validation (if required)
+            const companyField = document.getElementById('companyField');
+            if (companyField.style.display !== 'none') {
+                const company = form.company.value.trim();
+                if (!company) {
+                    form.company.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    form.company.classList.add('is-valid');
+                }
+            }
+            
+            // Terms validation
+            if (!form.terms.checked) {
+                form.terms.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                form.terms.classList.add('is-valid');
+            }
+            
+            // If valid, let auth manager handle the submission
+            if (isValid && window.authManager) {
+                window.authManager.handleRegistration(form);
+            }
+        });
+
+        // Real-time password confirmation validation
+        document.getElementById('confirmPassword').addEventListener('input', function() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = this.value;
+            
+            if (confirmPassword && password !== confirmPassword) {
+                this.classList.add('is-invalid');
+                this.classList.remove('is-valid');
+            } else if (confirmPassword) {
+                this.classList.add('is-valid');
+                this.classList.remove('is-invalid');
+            }
+        });
+
+        // Auto-focus first input
+        document.addEventListener('DOMContentLoaded', function() {
+            const nameInput = document.getElementById('name');
+            if (nameInput) {
+                nameInput.focus();
+            }
+        });
+    </script>
+
+    <style>
+        .role-option {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .role-option input[type="radio"] {
+            cursor: pointer;
+        }
+
+        .role-option:hover {
+            background-color: rgba(13, 110, 253, 0.05);
+        }
+
+        .password-strength {
+            margin-top: -0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .strength-meter {
+            height: 4px;
+            background: #e9ecef;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .strength-meter-fill {
+            height: 100%;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .strength-weak .strength-meter-fill {
+            width: 33%;
+            background: var(--danger-color);
+        }
+
+        .strength-medium .strength-meter-fill {
+            width: 66%;
+            background: var(--warning-color);
+        }
+
+        .strength-strong .strength-meter-fill {
+            width: 100%;
+            background: var(--success-color);
+        }
+
+        .strength-text {
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .strength-weak .strength-text {
+            color: var(--danger-color);
+        }
+
+        .strength-medium .strength-text {
+            color: var(--warning-color);
+        }
+
+        .strength-strong .strength-text {
+            color: var(--success-color);
+        }
+
+        @media (max-width: 576px) {
+            .role-option {
+                padding: 0.75rem;
+            }
+            
+            .role-option .role-details h6 {
+                font-size: 0.9rem;
+            }
+            
+            .role-option .role-details p {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</body>
+</html>

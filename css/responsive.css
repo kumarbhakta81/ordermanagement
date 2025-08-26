@@ -1,0 +1,514 @@
+/* Responsive Design Enhancements */
+
+/* Mobile First Approach */
+@media (max-width: 575.98px) {
+    /* Extra small devices (portrait phones) */
+    
+    /* Typography */
+    .display-1 { font-size: 2.5rem; }
+    .display-2 { font-size: 2rem; }
+    .display-3 { font-size: 1.75rem; }
+    .display-4 { font-size: 1.5rem; }
+    
+    /* Spacing */
+    .container { padding: 0 1rem; }
+    
+    /* Hero Section */
+    .hero-section {
+        padding: 100px 0 50px;
+        text-align: center;
+    }
+    
+    .hero-section h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-section .lead {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    /* Role Cards */
+    .role-selection .row {
+        margin: 0 -0.5rem;
+    }
+    
+    .role-selection .col-md-4 {
+        padding: 0 0.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .role-card {
+        padding: 1.5rem 1rem;
+        min-height: 150px;
+    }
+    
+    .role-card i {
+        font-size: 2rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .role-card h6 {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .role-card p {
+        font-size: 0.8rem;
+    }
+    
+    .role-card .btn {
+        font-size: 0.8rem;
+        padding: 0.375rem 0.75rem;
+    }
+    
+    /* Buttons */
+    .cta-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: center;
+    }
+    
+    .btn-lg {
+        width: 100%;
+        max-width: 280px;
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+    }
+    
+    /* Feature Cards */
+    .feature-card {
+        padding: 1.5rem 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .feature-card i {
+        font-size: 2rem;
+    }
+    
+    /* Navigation */
+    .navbar-brand {
+        font-size: 1.25rem;
+    }
+    
+    .navbar-toggler {
+        border: none;
+        padding: 0.25rem 0.5rem;
+    }
+    
+    /* Footer */
+    footer .row {
+        text-align: center;
+    }
+    
+    footer .col-md-6:first-child {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+    /* Small devices (landscape phones) */
+    
+    .hero-section {
+        padding: 120px 0 60px;
+    }
+    
+    .role-card {
+        padding: 2rem 1.5rem;
+    }
+    
+    .cta-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+    }
+    
+    .btn-lg {
+        min-width: 200px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    /* Medium devices (tablets) */
+    
+    .hero-section {
+        padding: 120px 0 80px;
+    }
+    
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+    
+    .role-selection .col-md-4 {
+        margin-bottom: 1rem;
+    }
+    
+    .feature-card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    /* Large devices (desktops) */
+    
+    .hero-section {
+        padding: 140px 0 100px;
+    }
+}
+
+@media (min-width: 1200px) {
+    /* Extra large devices (large desktops) */
+    
+    .hero-section {
+        padding: 160px 0 120px;
+    }
+    
+    .container {
+        max-width: 1140px;
+    }
+}
+
+/* Dashboard Responsive Overrides */
+@media (max-width: 575.98px) {
+    /* Mobile Dashboard */
+    .dashboard-sidebar {
+        width: 100%;
+        transform: translateX(-100%);
+    }
+    
+    .dashboard-sidebar.show {
+        transform: translateX(0);
+    }
+    
+    .dashboard-main {
+        margin-left: 0;
+    }
+    
+    .dashboard-navbar {
+        padding: 0.75rem 1rem;
+    }
+    
+    .sidebar-toggle {
+        margin-right: 0.5rem;
+    }
+    
+    .dashboard-content {
+        padding: 1rem;
+    }
+    
+    .page-title {
+        font-size: 1.5rem;
+    }
+    
+    .page-subtitle {
+        font-size: 0.9rem;
+    }
+    
+    /* Stats Cards Mobile */
+    .stats-card {
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .stats-icon {
+        font-size: 2rem;
+    }
+    
+    .stats-number {
+        font-size: 1.5rem;
+    }
+    
+    .stats-label {
+        font-size: 0.85rem;
+    }
+    
+    /* Quick Actions Mobile */
+    .quick-actions {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .quick-action {
+        padding: 1rem;
+        text-align: left;
+        display: flex;
+        align-items: center;
+    }
+    
+    .quick-action i {
+        font-size: 1.5rem;
+        margin-right: 1rem;
+        margin-bottom: 0;
+    }
+    
+    .quick-action h6 {
+        margin: 0;
+        font-size: 0.9rem;
+    }
+    
+    /* Tables Mobile */
+    .table-responsive {
+        border: none;
+        box-shadow: none;
+    }
+    
+    .table {
+        font-size: 0.85rem;
+    }
+    
+    .table thead th,
+    .table tbody td {
+        padding: 0.5rem 0.25rem;
+    }
+    
+    /* Modals Mobile */
+    .modal-dialog {
+        margin: 1rem;
+        max-width: calc(100% - 2rem);
+    }
+    
+    .modal-header {
+        padding: 1rem;
+    }
+    
+    .modal-body {
+        padding: 1rem;
+    }
+    
+    .modal-footer {
+        padding: 1rem;
+        gap: 0.5rem;
+    }
+    
+    .modal-footer .btn {
+        flex: 1;
+        margin: 0;
+    }
+    
+    /* Notifications Mobile */
+    .notification-dropdown-menu {
+        position: fixed !important;
+        top: 60px !important;
+        left: 1rem !important;
+        right: 1rem !important;
+        width: auto !important;
+        max-width: none !important;
+        transform: none !important;
+    }
+    
+    .notification-item {
+        padding: 0.75rem;
+    }
+    
+    .notification-content {
+        align-items: center;
+    }
+    
+    .notification-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-right: 0.5rem;
+    }
+    
+    .notification-title {
+        font-size: 0.8rem;
+    }
+    
+    .notification-message {
+        font-size: 0.75rem;
+    }
+    
+    .notification-time {
+        font-size: 0.7rem;
+    }
+}
+
+/* Tablet Specific Styles */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .dashboard-sidebar {
+        width: 240px;
+    }
+    
+    .dashboard-main {
+        margin-left: 240px;
+    }
+    
+    .dashboard-content {
+        padding: 1.5rem;
+    }
+    
+    .quick-actions {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .notification-dropdown-menu {
+        width: 320px;
+    }
+}
+
+/* Touch Optimizations */
+@media (pointer: coarse) {
+    /* Touch devices */
+    .btn {
+        min-height: 44px;
+        padding: 0.75rem 1rem;
+    }
+    
+    .nav-link {
+        min-height: 44px;
+        padding: 0.75rem 1rem;
+    }
+    
+    .form-control,
+    .form-select {
+        min-height: 44px;
+        padding: 0.75rem;
+    }
+    
+    .role-card {
+        min-height: 120px;
+        cursor: pointer;
+    }
+    
+    .quick-action {
+        min-height: 80px;
+    }
+    
+    .notification-item {
+        min-height: 60px;
+        cursor: pointer;
+    }
+    
+    .table tbody tr {
+        cursor: pointer;
+    }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .hero-image img,
+    .about-image img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .navbar,
+    .dashboard-sidebar,
+    .sidebar-toggle,
+    .notification-dropdown,
+    .quick-actions,
+    .btn,
+    .modal,
+    .toast-container {
+        display: none !important;
+    }
+    
+    .dashboard-main {
+        margin-left: 0 !important;
+    }
+    
+    .dashboard-content {
+        padding: 0 !important;
+    }
+    
+    .dashboard-card {
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+        break-inside: avoid;
+    }
+    
+    .page-title {
+        color: #000 !important;
+    }
+    
+    .table {
+        border-collapse: collapse !important;
+    }
+    
+    .table thead th,
+    .table tbody td {
+        border: 1px solid #ccc !important;
+    }
+}
+
+/* Landscape Orientation */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+    .hero-section {
+        padding: 80px 0 40px;
+    }
+    
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    
+    .role-selection {
+        margin: 1rem 0;
+    }
+    
+    .role-card {
+        padding: 1rem;
+    }
+    
+    .role-card i {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Accessibility Enhancements */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+@media (prefers-contrast: high) {
+    .role-card,
+    .feature-card,
+    .dashboard-card,
+    .stats-card {
+        border: 2px solid #000;
+    }
+    
+    .btn {
+        border: 2px solid currentColor;
+    }
+    
+    .nav-link:hover,
+    .nav-link.active {
+        background-color: #000;
+        color: #fff;
+    }
+}
+
+/* Focus Visible Support */
+@supports selector(:focus-visible) {
+    .btn:focus,
+    .nav-link:focus,
+    .form-control:focus,
+    .role-option:focus {
+        outline: none;
+    }
+    
+    .btn:focus-visible,
+    .nav-link:focus-visible,
+    .form-control:focus-visible,
+    .role-option:focus-visible {
+        outline: 2px solid var(--primary-color);
+        outline-offset: 2px;
+    }
+}

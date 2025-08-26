@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/auth.css" rel="stylesheet">
+</head>
+<body class="landing-page">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-boxes"></i> OrderManage Pro
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/login.html">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-light px-3 ms-2" href="pages/register.html">Register</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">
+                        Streamline Your Business with 
+                        <span class="text-primary">Smart Order Management</span>
+                    </h1>
+                    <p class="lead mb-4">
+                        Connect wholesalers and retailers through our comprehensive platform. 
+                        Manage products, track orders, and grow your business efficiently.
+                    </p>
+                    <div class="role-selection mb-4">
+                        <h5 class="mb-3">Choose Your Role to Get Started:</h5>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="role-card text-center p-4 border rounded-3 h-100">
+                                    <i class="fas fa-crown fa-3x text-warning mb-3"></i>
+                                    <h6 class="fw-bold">Admin</h6>
+                                    <p class="small text-muted">Manage system and users</p>
+                                    <button class="btn btn-outline-warning btn-sm" onclick="loginAsRole('admin')">
+                                        Login as Admin
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="role-card text-center p-4 border rounded-3 h-100">
+                                    <i class="fas fa-industry fa-3x text-primary mb-3"></i>
+                                    <h6 class="fw-bold">Wholesaler</h6>
+                                    <p class="small text-muted">Manage products and inventory</p>
+                                    <button class="btn btn-outline-primary btn-sm" onclick="loginAsRole('wholesaler')">
+                                        Login as Wholesaler
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="role-card text-center p-4 border rounded-3 h-100">
+                                    <i class="fas fa-store fa-3x text-success mb-3"></i>
+                                    <h6 class="fw-bold">Retailer</h6>
+                                    <p class="small text-muted">Browse and order products</p>
+                                    <button class="btn btn-outline-success btn-sm" onclick="loginAsRole('retailer')">
+                                        Login as Retailer
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cta-buttons">
+                        <a href="pages/login.html" class="btn btn-primary btn-lg me-3">
+                            <i class="fas fa-sign-in-alt"></i> Sign In
+                        </a>
+                        <a href="pages/register.html" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-user-plus"></i> Create Account
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-image text-center">
+                        <img src="assets/images/dashboard-preview.svg" alt="Dashboard Preview" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center mb-5">
+                    <h2 class="fw-bold">Powerful Features for Every User</h2>
+                    <p class="lead text-muted">Everything you need to manage your business operations efficiently</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card text-center p-4 bg-white rounded-3 h-100 shadow-sm">
+                        <i class="fas fa-chart-line fa-3x text-primary mb-3"></i>
+                        <h5 class="fw-bold">Analytics Dashboard</h5>
+                        <p class="text-muted">Track sales, monitor performance, and make data-driven decisions with comprehensive analytics.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center p-4 bg-white rounded-3 h-100 shadow-sm">
+                        <i class="fas fa-boxes fa-3x text-success mb-3"></i>
+                        <h5 class="fw-bold">Inventory Management</h5>
+                        <p class="text-muted">Keep track of stock levels, manage products, and automate reorder processes.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center p-4 bg-white rounded-3 h-100 shadow-sm">
+                        <i class="fas fa-shipping-fast fa-3x text-warning mb-3"></i>
+                        <h5 class="fw-bold">Order Tracking</h5>
+                        <p class="text-muted">Real-time order status updates from placement to delivery with notifications.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="fw-bold mb-4">Built for Modern Businesses</h2>
+                    <p class="mb-4">
+                        Our order management system bridges the gap between wholesalers and retailers, 
+                        providing a seamless platform for product discovery, ordering, and fulfillment.
+                    </p>
+                    <div class="row g-3">
+                        <div class="col-6">
+                            <div class="stat-item text-center">
+                                <h3 class="fw-bold text-primary">1000+</h3>
+                                <p class="text-muted">Active Users</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="stat-item text-center">
+                                <h3 class="fw-bold text-success">50K+</h3>
+                                <p class="text-muted">Orders Processed</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-image text-center">
+                        <img src="assets/images/business-growth.svg" alt="Business Growth" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="fas fa-boxes"></i> OrderManage Pro</h5>
+                    <p class="text-muted">Streamlining business operations worldwide.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-0">&copy; 2024 OrderManage Pro. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
