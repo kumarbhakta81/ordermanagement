@@ -1,0 +1,12 @@
+{
+  // ...other fields...
+  "homepage": "https://kumarbhakta81.github.io/ordermanagement",
+  "scripts": {
+    // ...other scripts...
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.0.0"
+  }
+}
