@@ -1,46 +1,165 @@
-# Getting Started with Create React App
+# Order Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern order management system with clean separation between frontend and backend components. The project is structured for GitHub Pages deployment and easy API integration.
 
-## Available Scripts
+## Project Structure
 
-In the project directory, you can run:
+```
+ordermanagement/
+├── client/                 # Frontend React application
+│   ├── src/               # React source code
+│   ├── public/            # Static assets
+│   ├── package.json       # Frontend dependencies
+│   └── build/             # Production build (generated)
+├── backend/               # Backend API server
+│   ├── src/               # Backend source code
+│   │   ├── routes/        # API route handlers
+│   │   ├── utils/         # Utilities and mock data
+│   │   ├── app.js         # Express app configuration
+│   │   └── server.js      # Server entry point
+│   ├── package.json       # Backend dependencies
+│   └── README.md          # Backend documentation
+├── backend_documentation.md # API specification
+└── README.md              # This file
+```
 
-### `npm start`
+## Quick Start
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Frontend (Client)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The frontend is a React application ready for GitHub Pages deployment.
 
-### `npm test`
+```bash
+# Navigate to client directory
+cd client
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Install dependencies
+npm install
 
-### `npm run build`
+# Start development server
+npm start
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Build for production
+npm run build
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# Deploy to GitHub Pages
+npm run deploy
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The client runs on `http://localhost:3000` and is configured to deploy to GitHub Pages at `https://kumarbhakta81.github.io/ordermanagement`.
 
-### `npm run eject`
+### Backend (API Server)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The backend provides mock API endpoints that simulate real database operations.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+# Navigate to backend directory
+cd backend
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Install dependencies
+npm install
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# Start development server
+npm run dev
 
-## Learn More
+# Start production server
+npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The backend runs on `http://localhost:3001` with API endpoints at `/api/*`.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Features
+
+### Frontend Features
+- **React 19** with TypeScript
+- **Material-UI** for modern UI components
+- **React Router** for navigation
+- **Authentication system** with role-based access
+- **Responsive design** optimized for all devices
+- **GitHub Pages ready** deployment configuration
+
+### Backend Features
+- **RESTful API** with Express.js
+- **Mock data endpoints** for all business entities
+- **CORS enabled** for frontend integration
+- **Structured for real API replacement**
+- **Comprehensive error handling**
+- **Health check endpoints**
+
+## API Endpoints
+
+The backend provides the following main endpoints:
+
+- **Orders**: `/api/orders` - Order management
+- **Products**: `/api/products` - Product catalog
+- **Customers**: `/api/customers` - Customer management
+- **Inventory**: `/api/inventory` - Stock management
+- **Authentication**: `/api/auth` - User authentication
+- **Dashboard**: `/api/dashboard` - Analytics and reporting
+
+See `backend/README.md` for detailed API documentation.
+
+## Development Workflow
+
+1. **Frontend Development**:
+   ```bash
+   cd client && npm start
+   ```
+
+2. **Backend Development**:
+   ```bash
+   cd backend && npm run dev
+   ```
+
+3. **Full System Testing**:
+   - Start both frontend and backend servers
+   - Frontend will connect to backend APIs
+   - Test complete user workflows
+
+## Deployment
+
+### GitHub Pages (Frontend)
+The frontend is configured for automatic GitHub Pages deployment:
+
+```bash
+cd client
+npm run deploy
+```
+
+This builds the React app and deploys it to the `gh-pages` branch.
+
+### Backend Deployment
+The backend can be deployed to any Node.js hosting service:
+- Heroku
+- Vercel
+- Railway
+- DigitalOcean
+- AWS
+
+## Future Enhancements
+
+### Frontend
+- Real-time order updates
+- Advanced search and filtering
+- File upload capabilities
+- PWA features
+
+### Backend
+- Database integration (PostgreSQL/MongoDB)
+- Real authentication with JWT
+- File upload handling
+- Email notifications
+- Third-party API integrations
+- Comprehensive testing suite
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test both frontend and backend
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.

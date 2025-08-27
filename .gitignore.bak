@@ -1,18 +1,31 @@
+
 # Dependencies
 node_modules/
 /.pnp
 .pnp.js
 
-# Production builds
+# Production build
 /build
-client/build/
-backend/dist/
-
-# Testing
-/coverage
 
 # Environment variables
 .env
+=======
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+
 .env.local
 .env.development.local
 .env.test.local
@@ -22,14 +35,10 @@ backend/dist/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-logs
-*.log
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
+# Package lock files (let npm/yarn handle these)
+package-lock.json
+yarn.lock
 
 # IDE/Editor files
 .vscode/
@@ -46,6 +55,6 @@ pids
 ehthumbs.db
 Thumbs.db
 
-# Temporary files
-tmp/
-temp/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
