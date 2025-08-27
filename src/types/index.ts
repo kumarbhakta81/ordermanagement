@@ -10,6 +10,8 @@ export interface User {
   tecId: string; // Unique TecID for all users
   email: string;
   role: UserRole;
+  companyName?: string; // Optional company name for suppliers and buyers
+  isVerified?: boolean; // Optional verification status
   isActive: boolean;
   createdAt: string;
   updatedAt: string;

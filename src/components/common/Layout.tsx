@@ -37,7 +37,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { UserRole } from '../../types';
 import { TecIdUtils } from '../../utils/tecIdUtils';
-import { TecIdDisplay } from '../common/TecIdDisplay';
+import { SimpleTecIdDisplay } from '../common/SimpleTecIdDisplay';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -173,12 +173,10 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           </Typography>
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-            <TecIdDisplay
+            <SimpleTecIdDisplay
               tecId={user.tecId}
-              variant="badge"
+              variant="chip"
               size="small"
-              color="secondary"
-              verified={user.role === UserRole.SUPPLIER ? (user as any).isVerified : true}
             />
 
             <IconButton color="inherit">

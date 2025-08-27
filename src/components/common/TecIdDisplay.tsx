@@ -6,7 +6,7 @@ import { TecIdUtils } from '../../utils/tecIdUtils';
 interface TecIdDisplayProps {
   tecId: string;
   variant?: 'chip' | 'text' | 'badge';
-  size?: 'small' | 'medium' | 'large';
+  size?: 'small' | 'medium';
   showCopy?: boolean;
   verified?: boolean;
   prefix?: string;
@@ -70,7 +70,7 @@ export const TecIdDisplay: React.FC<TecIdDisplayProps> = ({
         <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 0.5 }}>
           <Tooltip title={tooltipTitle}>
             <Typography
-              variant={size === 'small' ? 'caption' : size === 'large' ? 'h6' : 'body2'}
+              variant={size === 'small' ? 'caption' : 'body2'}
               component="span"
               sx={{ 
                 fontFamily: 'monospace',
@@ -84,7 +84,7 @@ export const TecIdDisplay: React.FC<TecIdDisplayProps> = ({
           {verified && (
             <Verified 
               sx={{ 
-                fontSize: size === 'small' ? 14 : size === 'large' ? 20 : 16,
+                fontSize: size === 'small' ? 14 : 16,
                 color: 'success.main' 
               }} 
             />
